@@ -717,8 +717,29 @@ const generateCategoricalChart = ({
       return rangeObj.radius;
     }
 
+    axisInRange(x, y) {
+      const { offset, xAxisMap } = this.state;
+
+      const xAxis = getAnyElementOfObject(xAxisMap);
+
+      if (eventType === 'axis' && xAxis && xAxis.activatesTooltip) {
+        const isInRange = x >= xAxis.x && x <= (xAxis.x + offset.width) &&
+          y >= xAxis.y && y <= (xAxis.y + xAxis.height);
+
+        return isInRange ? { x, y } : null;
+      }
+
+      return false;
+    }
+
     inRange(x, y) {
       const { layout } = this.props;
+
+      const axisInRange = this.axisInRange(x, y);
+
+      if (axisInRange) {
+        return axisInRange;
+      }
 
       if (layout === 'horizontal' || layout === 'vertical') {
         const { offset } = this.state;

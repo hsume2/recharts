@@ -59,6 +59,7 @@ class XAxis extends PureComponent {
       'preserveStart', 'preserveEnd', 'preserveStartEnd',
     ])]),
     reversed: PropTypes.bool,
+    activatesTooltip: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -77,6 +78,7 @@ class XAxis extends PureComponent {
     scale: 'auto',
     reversed: false,
     allowDuplicatedCategory: true,
+    activatesTooltip: false,
   };
 
   render() {
